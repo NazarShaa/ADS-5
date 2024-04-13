@@ -25,8 +25,10 @@ public:
     return top == 0;
   }
   T get() const {
-    if (!isEmpty())
+    if (!isEmpty()) {
       throw std::string("stack is empty");
+      return -1;
+    }
     else 
       return data[top];
   }
