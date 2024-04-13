@@ -16,6 +16,14 @@ public:
     else
       resize(2*size);
   }
+  T pop() {
+    if (!isEmpty()) {
+      throw std::string("stack is empty");
+      return -1;
+    }
+    else 
+      return data[--top];
+  }
   ~TStack(T* arr, int size) {
     for (int i = 0; i < size; i++) {
       delete arr[i];
