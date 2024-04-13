@@ -17,10 +17,8 @@ public:
       resize(2*size);
   }
   T pop() {
-    if (!isEmpty()) {
+    if (!isEmpty())
       throw std::string("stack is empty");
-      return -1;
-    }
     else 
       return data[--top];
   }
@@ -33,10 +31,8 @@ public:
     return top == 0;
   }
   T get() const {
-    if (!isEmpty()) {
+    if (!isEmpty())
       throw std::string("stack is empty");
-      return -1;
-    }
     else 
       return data[top];
   }
