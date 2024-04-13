@@ -2,6 +2,7 @@
 #ifndef INCLUDE_TSTACK_H_
 #define INCLUDE_TSTACK_H_
 #include <string>
+#include <stdexcept>
 
 template<typename T, int size>
 class TStack {
@@ -50,4 +51,4 @@ private:
   }
 };
 
-#endif  // INCLUDE_TSTACK_H_
+#endif // INCLUDE_TSTACK_H_
