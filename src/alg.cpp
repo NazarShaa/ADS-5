@@ -30,18 +30,18 @@ std::string infx2pstfx(std::string inf) {
           stack1.pop();
         } else if (c == '(' || stack1.isEmpty()) {
             stack1.push(c);
-	  } else if (!stack1.isEmpty()) {
+          } else if (!stack1.isEmpty()) {
               char elem = stack1.get();
               if (Priority(elem) < Priority(c)) {
                 stack1.push(c);
-	      } else {
+              } else {
                   while (Priority(elem) >= Priority(c) && !stack1.isEmpty()) {
                     post += stack1.pop();
                     post += ' ';
                   }
                   stack1.push(c);
                 }
-	    }
+            }
       }
   }
   while (!stack1.isEmpty()) {
@@ -60,10 +60,10 @@ int eval(std::string post) {
         continue;
       } else if (isdigit(post[i + 1])) {
           number += post[i];
-	  continue;
+          continue;
         } else {
-	    number += post[i];
-	    int value = atoi(number.c_str());
+            number += post[i];
+            int value = atoi(number.c_str());
             stack2.push(value);
             number = "";
           }
@@ -73,9 +73,9 @@ int eval(std::string post) {
         switch (post[i]) {
         case '+':
           stack2.push(a + b);
-	  break;
+          break;
         case '-':
-	  stack2.push(a - b);
+          stack2.push(a - b);
           break;
         case '*':
           stack2.push(a * b);
