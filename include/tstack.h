@@ -34,6 +34,7 @@ class TStack {
     else
       return data[top];
   }
+
  private:
   T* data;
   int top;
