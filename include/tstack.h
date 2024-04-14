@@ -6,7 +6,7 @@
 template<typename T, int size>
 class TStack {
 public:
-	TStack() : top(-1) {
+ TStack() : top(-1) {
 		data = new T[size];
 	}
 	void push(const T& item) {
