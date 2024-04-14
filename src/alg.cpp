@@ -22,77 +22,76 @@ std::string infx2pstfx(std::string inf) {
       post += c + ' ';
     else {
       char sym = stack1.get();
-			if (c == '(' || Priority(sym) < Priority(c) || stack1.isEmpty() || c == ')') {
-				while (Priority(sym) >= Priority(c)) {
-					post += sym + ' ';
-					stack1.pop();
-					if (!stack1.isEmpty())
-						sym = stack1.get();
-					else
-						break;
-				}
-				if (c == ')')
-					stack1.pop();
-				else
-					stack1.push(c);
-			}
-			else {
-				while (Priority(sym) >= Priority(c)) {
-					post += sym + ' ';
-					stack1.pop();
-					if (!stack1.isEmpty())
-						sym = stack1.get();
-					else
-						break;
-				}
-				stack1.push(c);
-			}
-		}
+      if (c == '(' || Priority(sym) < Priority(c) || stack1.isEmpty() || c == ')') {
+        while (Priority(sym) >= Priority(c)) {
+          post += sym + ' ';
+          stack1.pop();
+          if (!stack1.isEmpty())
+            sym = stack1.get();
+          else
+            break;
 	}
-	while (!stack1.isEmpty()) {
-		post += stack1.get() + ' ';
-		stack1.pop();
-	}
-	return post;
+	if (c == ')')
+	  stack1.pop();
+	else
+	  stack1.push(c);
+      }
+      else {
+        while (Priority(sym) >= Priority(c)) {
+          post += sym + ' ';
+          stack1.pop();
+          if (!stack1.isEmpty())
+	    sym = stack1.get();
+          else
+	    break;
+        }
+	stack1.push(c);
+      }
+    }
+  }
+  while (!stack1.isEmpty()) {
+    post += stack1.get() + ' ';
+    stack1.pop();
+  }
+  return post;
 }
 
 int eval(std::string post) {
-	TStack<int, 100> stack2;
-	std::string number;
-	for (int i = 0; i < post.size(); ++i) {
-		if (Priority(post[i]) == -1) {
-			if (post[i] == ' ')
-				continue;
-			else if (isdigit(post[i + 1])) {
-				number += post[i];
-				continue;
-			}
-			else {
-				number += post[i];
-				int value = atoi(number.c_str());
-				stack2.push(value);
-				number = "";
-			}
-		}
-		else {
-			int b = stack2.pop();
-			int a = stack2.pop();
-			switch (post[i]) {
-			case '+':
-				stack2.push(a + b);
-				break;
-			case '-':
-				stack2.push(a - b);
-				break;
-			case '*':
-				stack2.push(a * b);
-				break;
-			case '/':
-				stack2.push(a / b);
-				break;
-			}
-		}
-
-	}
-	return stack2.get();
+  TStack<int, 100> stack2;
+  std::string number;
+  for (int i = 0; i < post.size(); ++i) {
+    if (Priority(post[i]) == -1) {
+      if (post[i] == ' ')
+        continue;
+      else if (isdigit(post[i + 1])) {
+        number += post[i];
+	continue;
+      }
+      else {
+	number += post[i];
+	int value = atoi(number.c_str());
+	stack2.push(value);
+	number = "";
+      }
+    }
+    else {
+      int b = stack2.pop();
+      int a = stack2.pop();
+      switch (post[i]) {
+      case '+':
+        stack2.push(a + b);
+	break;
+      case '-':
+	stack2.push(a - b);
+	break;
+      case '*':
+	stack2.push(a * b);
+	break;
+      case '/':
+	stack2.push(a / b);
+        break;
+      }
+    }
+  }
+  return stack2.get();
 }
