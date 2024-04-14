@@ -2,6 +2,7 @@
 #ifndef INCLUDE_TSTACK_H_
 #define INCLUDE_TSTACK_H_
 #include <string>
+#include <stdexcept>
 
 template<typename T, int size>
 class TStack {
@@ -23,6 +24,7 @@ public:
 	}
 	~TStack() {
 		delete[] data;
+
 	}
 	bool isEmpty() const {
 		return top == -1;
@@ -46,4 +48,5 @@ private:
 		size = nsize;
 	}
 };
-#endif // INCLUDE_TSTACK_H_
+
+#endif  // INCLUDE_TSTACK_H_
