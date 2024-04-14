@@ -17,7 +17,7 @@ public:
       throw std::string("stack is full");
   }
   T pop() {
-    if (!isEmpty())
+    if (isEmpty())
       throw std::string("stack is empty");
     else
       return data[top--];
@@ -29,7 +29,7 @@ public:
     return top == -1;
   }
   T get() const {
-    if (!isEmpty())
+    if (isEmpty())
       throw std::string("stack is empty");
     else
       return data[top];
