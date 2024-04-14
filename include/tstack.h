@@ -14,7 +14,7 @@ public:
     if (top <= size - 1)
       data[++top] = item;
     else
-      resize(2 * size);
+      throw std::string("stack is full");
   }
   T pop() {
     if (!isEmpty())
