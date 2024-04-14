@@ -28,21 +28,21 @@ std::string infx2pstfx(std::string inf) {
             post += ' ';
           }
           stack1.pop();
-      } else if (c == '(' || stack1.isEmpty())
-          stack1.push(c);
-        else if (!stack1.isEmpty()) {
-	  char elem = stack1.get();
-          if (Priority(elem) < Priority(c))
+        } else if (c == '(' || stack1.isEmpty()) {
             stack1.push(c);
-          else {
-            while (Priority(elem) >= Priority(c) && !stack1.isEmpty()) {
-              post += stack1.pop();
-              post += ' ';
-            }
-            stack1.push(c);
-          }
-        }
-    }
+	  } else if (!stack1.isEmpty()) {
+              char elem = stack1.get();
+              if (Priority(elem) < Priority(c)) {
+                stack1.push(c);
+	      } else {
+                  while (Priority(elem) >= Priority(c) && !stack1.isEmpty()) {
+                    post += stack1.pop();
+                    post += ' ';
+                  }
+                  stack1.push(c);
+                }
+	    }
+      }
   }
   while (!stack1.isEmpty()) {
     post += stack1.pop();
@@ -56,17 +56,17 @@ int eval(std::string post) {
   std::string number;
   for (int i = 0; i < post.size(); ++i) {
     if (Priority(post[i]) == -1) {
-      if (post[i] == ' ')
+      if (post[i] == ' ') {
         continue;
-      else if (isdigit(post[i + 1])) {
-        number += post[i];
-	continue;
-      } else {
-	  number += post[i];
-	  int value = atoi(number.c_str());
-          stack2.push(value);
-          number = "";
-        }
+      } else if (isdigit(post[i + 1])) {
+          number += post[i];
+	  continue;
+        } else {
+	    number += post[i];
+	    int value = atoi(number.c_str());
+            stack2.push(value);
+            number = "";
+          }
     } else {
         int b = stack2.pop();
         int a = stack2.pop();
