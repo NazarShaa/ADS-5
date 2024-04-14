@@ -18,40 +18,36 @@ std::string infx2pstfx(std::string inf) {
   std::string post;
   TStack<char, 100> stack1;
   for (char c: inf) {
-    if (c > '0' && c <= '9')
-      post += c + ' ';
+    if (Priority(c) == -1)
+      post += c
+      post += ' ';
     else {
-      char sym = stack1.get();
-      if (c == '(' || Priority(sym) < Priority(c) || stack1.isEmpty() || c == ')') {
-        while (Priority(sym) >= Priority(c)) {
-          post += sym + ' ';
-          stack1.pop();
-          if (!stack1.isEmpty())
-            sym = stack1.get();
-          else
-            break;
+      if (c == ')') {
+        while (stack1.get() != '(') {
+	  post += stack1.pop();
+	  post += ' ';
 	}
-	if (c == ')')
-	  stack1.pop();
-	else
-	  stack1.push(c);
+	stack1.pop();
       }
-      else {
-        while (Priority(sym) >= Priority(c)) {
-          post += sym + ' ';
-          stack1.pop();
-          if (!stack1.isEmpty())
-	    sym = stack1.get();
-          else
-	    break;
-        }
-	stack1.push(c);
+      else if (c == '(' || stack1.isEmpty())
+        stack1.push(c);
+      else if (!stack1.isEmpty()) {
+	char elem = stack1.get();
+	if (Priority(elem) < Priority(c))
+	  stack1.push(c);
+	else {
+	  while (Priority(elem) >= Priority(c) && !stack1.isEmpty()) {
+	    post += stack1.pop();
+	    post += ' ';
+	  }
+	  stack1.push(c);
+	}
       }
     }
   }
   while (!stack1.isEmpty()) {
-    post += stack1.get() + ' ';
-    stack1.pop();
+    post += stack1.pop();
+    post += ' ';
   }
   return post;
 }
