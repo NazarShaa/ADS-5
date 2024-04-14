@@ -1,5 +1,4 @@
 // Copyright 2021 NNTU-CS
-#include <map>
 #include "tstack.h"
 
 int Priority(char c) {
@@ -48,6 +47,7 @@ std::string infx2pstfx(std::string inf) {
     post += stack1.pop();
     post += ' ';
   }
+  post.pop_back();
   return post;
 }
 
