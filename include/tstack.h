@@ -36,15 +36,6 @@ public:
   }
 private:
   T* data;
-  int top, size;
-  void resize(int nsize) {
-    T* temp = new T[nsize];
-    for (int i = 0; i < size; i++) {
-      temp[i] = data[i];
-    }
-    delete[] data;
-    data = temp;
-    size = nsize;
-  }
+  int top;
 };
 #endif  // INCLUDE_TSTACK_H_
